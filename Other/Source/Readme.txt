@@ -1,74 +1,47 @@
-ClamWin Portable Launcher
-=========================
+The base application's source code is available from the portable app's
+homepage listed in the help.html file (if applicable).
 
-Copyright (C) 2004-2008 John T. Haller of PortableApps.com
-
-Website: http://PortableApps.com/ClamWinPortable
-
-This software is OSI Certified Open Source Software.
-OSI Certified is a certification mark of the Open Source Initiative.
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-
-ABOUT CLAMWIN PORTABLE
-======================
-The ClamWin Portable Launcher allows you to run ClamWin from a removable drive whose letter changes as you move it to another computer.  It allows you to split the program directory from your profiles directory without hand editing any files.  The program can be entirely self-contained on the drive and then used on any Windows computer.
-
+Details of most other things are available there as well.
 
 LICENSE
 =======
-This code is released under the GPL.  The full code is included with this package as ClamWinPortable.nsi.
 
+This package's installer and launcher are released under the GPL. The launcher
+is the PortableApps.com Launcher, available with full source and documentation
+from http://portableapps.com/development. We request that developers using the
+PortableApps.com Launcher please leave this directory intact and unchanged.
 
-INSTALLATION / DIRECTORY STRUCTURE
-==================================
-By default, the program expects this directory structure:
+USER CONFIGURATION
+==================
 
--\ <--- Directory with ClamWinPortable.exe
-  +\App\
-    +\clamwin\
-  +\Data\
-    +\db\
-    +\log\
-    +\quarantine\
+Some configuration in the PortableApps.com Launcher can be overridden by the
+user in an INI file next to ClamWinPortable.exe called ClamWinPortable.ini.
+If you are happy with the default options, it is not necessary, though.  There
+is an example INI included with this package to get you started.  To use it,
+copy AppNamePortable.ini from this directory to ClamWinPortable.ini next to
+ClamWinPortable.exe. The options in the INI file are as follows:
 
-It can be used in other directory configurations by including the ClamWinPortable.ini file in the same directory as ClamWinPortable.exe and configuring it as details in the INI file section below.
+   AdditionalParameters=
+   DisableSplashScreen=false
+   RunLocally=false
 
+(There is no need for an INI header in this file; if you have one, though, it
+won't damage anything.)
 
-ClamWinPortable.INI CONFIGURATION
-=================================
-The ClamWin Portable Launcher will look for an ini file called ClamWinPortable.ini.  If you are happy with the default options, it is not necessary, though.  The INI file is formatted as follows:
+The AdditionalParameters entry allows you to pass additional command-line
+parameters to the application.
 
-[ClamWinPortable]
-ClamWinDirectory=App\clamwin\bin
-SettingsDirectory=Data\settings
-DBDirectory=Data\db
-LogDirectory=Data\log
-QuarantineDirectory=Data\quarantine
-AdditionalParameters=
-WaitForClamWin=false
-ClamWinExecutable=ClamWin.exe
-ScanExecutable=clamscan.exe
-UpdateExecutable=freshclam.exe
-DisableSplashScreen=false
+The DisableSplashScreen entry allows you to run the launcher without the splash
+screen showing up.  The default is false.
 
-The ClamWinDirectory, DBDirectory, LogDirectory, SettingsDirectory and QuarantineDirectory entries should be set to the *relative* path to the appropriate directories from the current directory.  All must be a subdirectory (or multiple subdirectories) of the directory containing ClamWinPortable.exe.  The default entries for these are described in the installation section above.
+The RunLocally entry allows you to run the portable application from a read-
+only medium. This is known as Live mode. It copies what it needs to to a
+temporary directory on the host computer, runs the application, and then
+deletes it afterwards, leaving nothing behind. This can be useful for running
+the application from a CD or if you work on a computer that may have spyware or
+viruses and you'd like to keep your device set to read-only. As a consequence
+of this technique, any changes you make during the Live mode session aren't
+saved back to your device.  The default is false.
 
-The AdditionalParameters entry allows you to pass additional commandline parameter entries to ClamWin.exe.  Whatever you enter here will be appended to the call to gaim.exe.
-
-The WaitForClamWin entry allows you to set the ClamWin Portable Launcher to wait for ClamWin to close before it closes.  This option is mainly of use when ClamWin.exe is called by another program that awaits it's conclusion to perform a task.
-
-The ClamWinExecutable, ScanExecutable and UpdateExecutable entries allows you to set the ClamWin Portable Launcher to use alternate EXEs call to launch ClamWin.  This is helpful if you are using a machine that is set to deny ClamWin.exe, etc from running.  You'll need to rename the ClamWin.exe file and then enter the name you gave it on the clamwinexecutable= line of the INI.
+There may be other values also permitted in the user configuration file by the
+portable application; refer to help.html for any details of them.
